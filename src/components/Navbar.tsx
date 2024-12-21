@@ -4,7 +4,7 @@ import { fetchWeatherDataCity } from "../utils/apiCalls";
 import { ApiResponse } from "../types/apiResponseType";
 import { AxiosResponse } from "axios";
 
-function Navbar({ setWeatherData, fetching, setFetching, toast }: { setWeatherData: Function, fetching: boolean, setFetching: Function, toast: Function }) {
+function Navbar({ setWeatherData, fetching, setFetching }: { setWeatherData: Function, fetching: boolean, setFetching: Function }) {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
 
@@ -35,7 +35,6 @@ function Navbar({ setWeatherData, fetching, setFetching, toast }: { setWeatherDa
         const res: AxiosResponse | null = await fetchWeatherDataCity(search);
         if (res?.status === 400) {
           setWeatherData(null);
-          toast('Unable to fetch weather data. Please try again.');
         } else {
           setWeatherData(res?.data as ApiResponse);
         }

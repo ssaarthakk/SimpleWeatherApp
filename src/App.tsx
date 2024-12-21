@@ -5,7 +5,6 @@ import Weather from './components/Weather';
 import { ApiResponse } from './types/apiResponseType';
 import Forecast from './components/Forecast';
 import { AxiosResponse } from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const [weatherData, setWeatherData] = useState<ApiResponse | null>(null);
@@ -30,7 +29,6 @@ function App() {
     console.log(res?.status);
     if (res?.status === 400) {
       setWeatherData(null);
-      toast('Unable to fetch weather data. Please try again.');
       setFetching(false);
       return;
     }
@@ -47,14 +45,13 @@ function App() {
 
   return (
     <>
-      <Navbar setWeatherData={setWeatherData} fetching={fetching} setFetching={setFetching} toast={toast}/>
+      <Navbar setWeatherData={setWeatherData} fetching={fetching} setFetching={setFetching}/>
       <div className="flex flex-col justify-center items-center ">
         <Weather weatherData={weatherData} fetching={fetching}/>
         {
           weatherData && <Forecast weatherData={weatherData}/>
         }
       </div>
-      <ToastContainer />
     </>
   )
 }
