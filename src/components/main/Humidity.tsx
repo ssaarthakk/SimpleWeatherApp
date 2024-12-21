@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Humidity({ humidity, windSpeed }: { humidity: number, windSpeed: number }) {
   return (
     <div className='text-2xl w-full bg-gray-200 p-6 rounded-md'>

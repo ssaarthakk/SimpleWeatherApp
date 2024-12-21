@@ -2,8 +2,9 @@ import { useState } from "react";
 import IconSearch from "./svgs/SearchIcon"
 import { fetchWeatherDataCity } from "../utils/apiCalls";
 import { ApiResponse } from "../types/apiResponseType";
+import { AxiosResponse } from "axios";
 
-function Navbar({ setWeatherData, fetching, setFetching }: { setWeatherData: Function, fetching: boolean, setFetching: Function }) {
+function Navbar({ setWeatherData, fetching, setFetching, toast }: { setWeatherData: Function, fetching: boolean, setFetching: Function, toast: Function }) {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
 
@@ -31,8 +32,13 @@ function Navbar({ setWeatherData, fetching, setFetching }: { setWeatherData: Fun
         setWeatherData(null);
         return;
       } else {
-        const wd: ApiResponse = await fetchWeatherDataCity(search);
-        setWeatherData(wd);
+        const res: AxiosResponse | null = await fetchWeatherDataCity(search);
+        if (res?.status === 400) {
+          setWeatherData(null);
+          toast('Unable to fetch weather data. Please try again.');
+        } else {
+          setWeatherData(res?.data as ApiResponse);
+        }
       }
     } catch (error) {
       console.log('Error fetching data with city: ', error);
@@ -44,7 +50,7 @@ function Navbar({ setWeatherData, fetching, setFetching }: { setWeatherData: Fun
 
   return (
     <nav className="max-w-screen py-4 px-6 flex justify-between items-center bg-gray-100 text-gray-800 overflow-clip max-h-[10vh]">
-      <span className="text-2xl ">
+      <span className="text-4xl font-bold">
         Weather App
       </span>
       <div className="sm:block hidden">

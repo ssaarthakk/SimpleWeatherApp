@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Conditions({ text, icon }: { text: string, icon: string }) {
   return (
     <div className='text-2xl w-full bg-gray-200 p-6 rounded-md flex flex-col'>
