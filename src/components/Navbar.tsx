@@ -44,6 +44,7 @@ function Navbar({ setWeatherData, fetching, setFetching }: { setWeatherData: Fun
     } finally {
       setSearch('');
       setFetching(false);
+      setShowSearch(false);
     }
   }
 
