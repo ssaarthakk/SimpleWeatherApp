@@ -45,13 +45,17 @@ function App() {
 
   return (
     <>
-      <Navbar setWeatherData={setWeatherData} fetching={fetching} setFetching={setFetching}/>
-      <div className="flex flex-col justify-center items-center ">
-        <Weather weatherData={weatherData} fetching={fetching}/>
-        {
-          weatherData && <Forecast weatherData={weatherData}/>
-        }
-      </div>
+      <Navbar setWeatherData={setWeatherData} fetching={fetching} setFetching={setFetching} />
+      <main className="flex flex-col items-center">
+        <div className="w-full max-w-6xl px-4 md:px-8 py-6 md:py-10">
+          <Weather weatherData={weatherData} fetching={fetching} />
+          {weatherData && (
+            <div className="mt-8">
+              <Forecast weatherData={weatherData} />
+            </div>
+          )}
+        </div>
+      </main>
     </>
   )
 }

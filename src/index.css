@@ -7,3 +7,14 @@
     font-weight: 400;
     font-style: normal;
 }
+
+/* Global selection & scroll styles for dark theme */
+::selection {
+    background: rgba(56, 189, 248, 0.35);
+    color: #e2e8f0;
+}
+
+/* Smooth background gradient fallback if tailwind classes haven't loaded yet */
+html.dark body {
+    background-color: #0b1220;
+}

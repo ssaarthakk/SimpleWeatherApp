@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'selector',
+  // Permanently enable dark theme via <html class="dark">
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        soft: '0 10px 30px -15px rgba(0,0,0,0.5)'
+      }
+    },
   },
   plugins: [],
 }
